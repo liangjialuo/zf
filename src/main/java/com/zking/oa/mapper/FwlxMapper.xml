@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.oa.mapper.FwlxMapper" >
+
+  <cache type="org.mybatis.caches.ehcache.EhcacheCache">
+    <property name="timeToIdleSeconds" value="3600"/>
+    <property name="timeToLiveSeconds" value="3600"/>
+    <property name="maxEntriesLocalHeap" value="1000"/>
+    <property name="maxEntriesLocalDisk" value="10000000"/>
+    <property name="memoryStoreEvictionPolicy" value="LRU"/>
+  </cache>
+
+  <resultMap id="BaseResultMap" type="com.zking.oa.model.Fwlx" >
+    <constructor >
+      <idArg column="lxbh" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="lxmc" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="lx" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    lxbh, lxmc,lx
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" useCache="true" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_fwlx
+    where lxbh = #{lxbh,jdbcType=INTEGER}
+  </select>
+  <select id="list" resultType="com.zking.oa.model.Fwlx" parameterType="com.zking.oa.model.Fwlx">
+    select *
+    from t_fwlx
+    WHERE lx = #{lx,jdbcType=INTEGER}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_fwlx
+    where lxbh = #{lxbh,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zking.oa.model.Fwlx" useGeneratedKeys="true" keyProperty="lxbh">
+    insert into t_fwlx (lxbh, lxmc,lx)
+    values (#{lxbh,jdbcType=INTEGER}, #{lxmc,jdbcType=VARCHAR}, #{lx,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.oa.model.Fwlx" >
+    insert into t_fwlx
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="lxbh != null" >
+        lxbh,
+      </if>
+      <if test="lxmc != null" >
+        lxmc,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="lxbh != null" >
+        #{lxbh,jdbcType=INTEGER},
+      </if>
+      <if test="lxmc != null" >
+        #{lxmc,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.oa.model.Fwlx" >
+    update t_fwlx
+    <set >
+      <if test="lxmc != null" >
+        lxmc = #{lxmc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where lxbh = #{lxbh,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zking.oa.model.Fwlx" >
+    update t_fwlx
+    set lxmc = #{lxmc,jdbcType=VARCHAR}
+    where lxbh = #{lxbh,jdbcType=INTEGER}
+  </update>
+</mapper>

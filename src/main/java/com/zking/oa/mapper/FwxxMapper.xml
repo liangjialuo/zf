@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.oa.mapper.FwxxMapper">
+    <resultMap id="BaseResultMap" type="com.zking.oa.model.Fwxx">
+        <constructor>
+            <idArg column="fwbh" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="bt" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="dz" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="zj" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="lxr" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="lxdh" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="lxbh" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="zxqk" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="szlc" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="fwcx" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="bz" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="yhbh" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="fbsj" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+        </constructor>
+    </resultMap>
+    <sql id="Base_Column_List">
+    fwbh, bt, dz, zj, lxr, lxdh, lxbh, zxqk, szlc, fwcx, bz, yhbh, fbsj
+  </sql>
+
+    <select id="selectFwxx" resultType="Fwxx" parameterType="Fwxx">
+        SELECT *
+        FROM t_fwxx
+        WHERE 1=1
+        <if test="yhbh != null and ''!= yhbh ">
+            AND yhbh = #{yhbh,jdbcType=INTEGER}
+        </if>
+
+        <if test="bt != null">
+            AND bt LIKE '%${bt}%'
+        </if>
+
+        <if test="lxbh != null and ''!= lxbh">
+            AND lxbh = #{lxbh,jdbcType=INTEGER}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultType="Fwxx" parameterType="Fwxx">
+        SELECT *
+        FROM t_fwxx
+        WHERE fwbh = #{fwbh,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_fwxx
+    where fwbh = #{fwbh,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.zking.oa.model.Fwxx" useGeneratedKeys="true" keyProperty="fwbh">
+    insert into t_fwxx (fwbh, bt, dz, 
+      zj, lxr, lxdh, lxbh, 
+      zxqk, szlc, fwcx, bz, 
+      yhbh, fbsj)
+    values (#{fwbh,jdbcType=INTEGER}, #{bt,jdbcType=VARCHAR}, #{dz,jdbcType=VARCHAR}, 
+      #{zj,jdbcType=INTEGER}, #{lxr,jdbcType=VARCHAR}, #{lxdh,jdbcType=VARCHAR}, #{lxbh,jdbcType=INTEGER}, 
+      #{zxqk,jdbcType=INTEGER}, #{szlc,jdbcType=INTEGER}, #{fwcx,jdbcType=INTEGER}, #{bz,jdbcType=VARCHAR}, 
+      #{yhbh,jdbcType=INTEGER}, #{fbsj,jdbcType=TIMESTAMP})
+  </insert>
+    <insert id="insertSelective" parameterType="com.zking.oa.model.Fwxx">
+        insert into t_fwxx
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="fwbh != null">
+                fwbh,
+            </if>
+            <if test="bt != null">
+                bt,
+            </if>
+            <if test="dz != null">
+                dz,
+            </if>
+            <if test="zj != null">
+                zj,
+            </if>
+            <if test="lxr != null">
+                lxr,
+            </if>
+            <if test="lxdh != null">
+                lxdh,
+            </if>
+            <if test="lxbh != null">
+                lxbh,
+            </if>
+            <if test="zxqk != null">
+                zxqk,
+            </if>
+            <if test="szlc != null">
+                szlc,
+            </if>
+            <if test="fwcx != null">
+                fwcx,
+            </if>
+            <if test="bz != null">
+                bz,
+            </if>
+            <if test="yhbh != null">
+                yhbh,
+            </if>
+            <if test="fbsj != null">
+                fbsj,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="fwbh != null">
+                #{fwbh,jdbcType=INTEGER},
+            </if>
+            <if test="bt != null">
+                #{bt,jdbcType=VARCHAR},
+            </if>
+            <if test="dz != null">
+                #{dz,jdbcType=VARCHAR},
+            </if>
+            <if test="zj != null">
+                #{zj,jdbcType=INTEGER},
+            </if>
+            <if test="lxr != null">
+                #{lxr,jdbcType=VARCHAR},
+            </if>
+            <if test="lxdh != null">
+                #{lxdh,jdbcType=VARCHAR},
+            </if>
+            <if test="lxbh != null">
+                #{lxbh,jdbcType=INTEGER},
+            </if>
+            <if test="zxqk != null">
+                #{zxqk,jdbcType=INTEGER},
+            </if>
+            <if test="szlc != null">
+                #{szlc,jdbcType=INTEGER},
+            </if>
+            <if test="fwcx != null">
+                #{fwcx,jdbcType=INTEGER},
+            </if>
+            <if test="bz != null">
+                #{bz,jdbcType=VARCHAR},
+            </if>
+            <if test="yhbh != null">
+                #{yhbh,jdbcType=INTEGER},
+            </if>
+            <if test="fbsj != null">
+                #{fbsj,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.zking.oa.model.Fwxx">
+        update t_fwxx
+        <set>
+            <if test="bt != null">
+                bt = #{bt,jdbcType=VARCHAR},
+            </if>
+            <if test="dz != null">
+                dz = #{dz,jdbcType=VARCHAR},
+            </if>
+            <if test="zj != null">
+                zj = #{zj,jdbcType=INTEGER},
+            </if>
+            <if test="lxr != null">
+                lxr = #{lxr,jdbcType=VARCHAR},
+            </if>
+            <if test="lxdh != null">
+                lxdh = #{lxdh,jdbcType=VARCHAR},
+            </if>
+            <if test="lxbh != null">
+                lxbh = #{lxbh,jdbcType=INTEGER},
+            </if>
+            <if test="zxqk != null">
+                zxqk = #{zxqk,jdbcType=INTEGER},
+            </if>
+            <if test="szlc != null">
+                szlc = #{szlc,jdbcType=INTEGER},
+            </if>
+            <if test="fwcx != null">
+                fwcx = #{fwcx,jdbcType=INTEGER},
+            </if>
+            <if test="bz != null">
+                bz = #{bz,jdbcType=VARCHAR},
+            </if>
+            <if test="yhbh != null">
+                yhbh = #{yhbh,jdbcType=INTEGER},
+            </if>
+            <if test="fbsj != null">
+                fbsj = #{fbsj,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where fwbh = #{fwbh,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.zking.oa.model.Fwxx">
+    update t_fwxx
+    set bt = #{bt,jdbcType=VARCHAR},
+      dz = #{dz,jdbcType=VARCHAR},
+      zj = #{zj,jdbcType=INTEGER},
+      lxr = #{lxr,jdbcType=VARCHAR},
+      lxdh = #{lxdh,jdbcType=VARCHAR},
+      lxbh = #{lxbh,jdbcType=INTEGER},
+      zxqk = #{zxqk,jdbcType=INTEGER},
+      szlc = #{szlc,jdbcType=INTEGER},
+      fwcx = #{fwcx,jdbcType=INTEGER},
+      bz = #{bz,jdbcType=VARCHAR},
+      yhbh = #{yhbh,jdbcType=INTEGER},
+      fbsj = #{fbsj,jdbcType=TIMESTAMP}
+    where fwbh = #{fwbh,jdbcType=INTEGER}
+  </update>
+</mapper>

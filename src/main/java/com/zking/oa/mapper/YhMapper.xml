@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.oa.mapper.YhMapper">
+    <resultMap id="BaseResultMap" type="com.zking.oa.model.Yh">
+        <constructor>
+            <idArg column="yhbh" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="yhzh" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="yhmm" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        </constructor>
+    </resultMap>
+    <resultMap id="row" type="com.zking.oa.model.Yh">
+        <id column="yhbh" property="yhbh" javaType="java.lang.Integer"/>
+        <result column="yhzh" property="yhzh" javaType="java.lang.String"/>
+        <result column="yhmm" property="yhmm" javaType="java.lang.String"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    yhbh, yhzh, yhmm
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="Yh">
+        select
+        <include refid="Base_Column_List"/>
+        from t_yh
+        where yhzh = #{yhzh,jdbcType=VARCHAR}
+        AND yhmm=#{yhmm,jdbcType=VARCHAR}
+    </select>
+    <select id="list" resultMap="row" parameterType="com.zking.oa.model.Yh">
+        SELECT *
+        FROM t_yh
+        WHERE 1=1
+        <if test="null!=yhzh and ''!=yhzh">
+            and yhzh LIKE CONNECT ('%',#{yhzh},'%')
+        </if>
+    </select>
+    <select id="loadNotNull" resultType="Yh" parameterType="Yh">
+        SELECT *
+        FROM t_yh
+        where yhzh = #{yhzh,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_yh
+    where yhbh = #{yhbh,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.zking.oa.model.Yh" useGeneratedKeys="true" keyProperty="yhbh">
+    insert into t_yh (yhbh, yhzh, yhmm
+      )
+    values (#{yhbh,jdbcType=INTEGER}, #{yhzh,jdbcType=VARCHAR}, #{yhmm,jdbcType=VARCHAR}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.zking.oa.model.Yh">
+        insert into t_yh
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="yhbh != null">
+                yhbh,
+            </if>
+            <if test="yhzh != null">
+                yhzh,
+            </if>
+            <if test="yhmm != null">
+                yhmm,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="yhbh != null">
+                #{yhbh,jdbcType=INTEGER},
+            </if>
+            <if test="yhzh != null">
+                #{yhzh,jdbcType=VARCHAR},
+            </if>
+            <if test="yhmm != null">
+                #{yhmm,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.zking.oa.model.Yh">
+        update t_yh
+        <set>
+            <if test="yhzh != null">
+                yhzh = #{yhzh,jdbcType=VARCHAR},
+            </if>
+            <if test="yhmm != null">
+                yhmm = #{yhmm,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where yhbh = #{yhbh,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.zking.oa.model.Yh">
+    update t_yh
+    set yhzh = #{yhzh,jdbcType=VARCHAR},
+      yhmm = #{yhmm,jdbcType=VARCHAR}
+    where yhbh = #{yhbh,jdbcType=INTEGER}
+  </update>
+</mapper>

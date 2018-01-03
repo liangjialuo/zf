@@ -7,7 +7,7 @@
 <html>
 <head>
     <title>租房网</title>
-    <%@include file="main.jsp"%>
+    <%@include file="main.jsp" %>
 </head>
 <BODY BGCOLOR=#FFFFFF LEFTMARGIN=0 TOPMARGIN=0 MARGINWIDTH=0 MARGINHEIGHT=0>
 <table width="780" border="0" align="center" cellpadding="0" cellspacing="0">
